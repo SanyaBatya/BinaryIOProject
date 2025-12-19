@@ -115,13 +115,10 @@ namespace BinaryIO {
     }
 
     vector<uint8_t> Serializer::serializeInt(int value) {
-        vector<uint8_t> result;
+        vector<uint8_t> result(4);
 
-        // Новая простая реализация
-        result.push_back(value & 0xFF);
-        result.push_back((value >> 8) & 0xFF);
-        result.push_back((value >> 16) & 0xFF);
-        result.push_back((value >> 24) & 0xFF);
+        // Оптимизированная реализация с memcpy
+        memcpy(result.data(), &value, sizeof(value));
 
         return result;
     }

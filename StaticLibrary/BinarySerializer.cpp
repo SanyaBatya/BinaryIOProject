@@ -140,9 +140,13 @@ namespace BinaryIO {
     }
 
     int Serializer::deserializeInt(const vector<uint8_t>& data, size_t& offset) {
-
         if (offset + 4 > data.size()) {
             throw runtime_error("Недостаточно данных для десериализации int");
+        }
+
+        // Добавим валидацию данных
+        if (data[offset] == 0xFF && data[offset + 1] == 0xFF) {
+            throw runtime_error("Некорректные данные: обнаружены значения 0xFFFF");
         }
 
         int value = 0;

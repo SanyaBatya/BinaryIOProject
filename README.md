@@ -19,3 +19,9 @@
 ```bash
 cd StaticLibrary
 cl /c BinarySerializer.cpp /Fostatic.lib
+
+### Динамическая библиотека:
+```bash
+cd DynamicLibrary
+cl /c BinaryFileHandler.cpp /DDYNAMICLIBRARY_EXPORTS /Fodynamic.obj
+link /DLL dynamic.obj /OUT:BinaryFileHandler.dll

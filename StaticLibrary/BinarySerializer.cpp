@@ -117,8 +117,11 @@ namespace BinaryIO {
     vector<uint8_t> Serializer::serializeInt(int value) {
         vector<uint8_t> result(4);
 
-        // Оптимизированная реализация с memcpy
-        memcpy(result.data(), &value, sizeof(value));
+        // Объединенная реализация: быстрая и безопасная
+        result[0] = value & 0xFF;
+        result[1] = (value >> 8) & 0xFF;
+        result[2] = (value >> 16) & 0xFF;
+        result[3] = (value >> 24) & 0xFF;
 
         return result;
     }
